@@ -104,8 +104,8 @@ def split_cross_attention_forward(self, x, context=None, mask=None):
         q, k, v = map(lambda t: rearrange(t, 'b n (h d) -> (b h) n d', h=h), (q_in, k_in, v_in))
         del q_in, k_in, v_in
 
-        print("q: ", q_in.shape)
-        print("k: ", k_in.shape)
+        print("q: ", q.shape)
+        print("k: ", k.shape)
     
         r1 = torch.zeros(q.shape[0], q.shape[1], v.shape[2], device=q.device, dtype=q.dtype)
     
