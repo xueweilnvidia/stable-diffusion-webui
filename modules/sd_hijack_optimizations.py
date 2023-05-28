@@ -124,6 +124,8 @@ def split_cross_attention_forward(self, x, context=None, mask=None):
         slice_size = q.shape[1] // steps if (q.shape[1] % steps) == 0 else q.shape[1]
         for i in range(0, q.shape[1], slice_size):
             end = i + slice_size
+            
+            print("hello1")
             s1 = einsum('b i d, b j d -> b i j', q[:, i:end], k)
     
             s2 = s1.softmax(dim=-1, dtype=q.dtype)
@@ -146,6 +148,7 @@ def split_cross_attention_forward(self, x, context=None, mask=None):
 mem_total_gb = psutil.virtual_memory().total // (1 << 30)
 
 def einsum_op_compvis(q, k, v):
+    print("hello2")
     s = einsum('b i d, b j d -> b i j', q, k)
     s = s.softmax(dim=-1, dtype=s.dtype)
     return einsum('b i j, b j d -> b i d', s, v)
