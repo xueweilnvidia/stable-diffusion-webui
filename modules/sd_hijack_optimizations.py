@@ -127,6 +127,8 @@ def split_cross_attention_forward(self, x, context=None, mask=None):
             
             print("hello1")
             s1 = einsum('b i d, b j d -> b i j', q[:, i:end], k)
+            print("q shape:", q[:, i:end].shape)
+            print("k shape:", k.shape)
     
             s2 = s1.softmax(dim=-1, dtype=q.dtype)
             del s1
