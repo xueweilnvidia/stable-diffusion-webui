@@ -132,11 +132,11 @@ def split_cross_attention_forward(self, x, context=None, mask=None):
             end = i + slice_size
             
             print("hello1")
-            # s1 = einsum('b i d, b j d -> b i j', q[:, i:end], k)
-            k_i = torch.permute(k, (0, 2, 1))
-            s1 = torch.bmm(q[:, i:end], k_i)
-            print("q shape:", q[:, i:end].shape)
-            print("k shape:", k_i.shape)
+            s1 = einsum('b i d, b j d -> b i j', q[:, i:end], k)
+            # k_i = torch.permute(k, (0, 2, 1))
+            # s1 = torch.bmm(q[:, i:end], k_i)
+            # print("q shape:", q[:, i:end].shape)
+            # print("k shape:", k_i.shape)
     
             s2 = s1.softmax(dim=-1, dtype=q.dtype)
             del s1
