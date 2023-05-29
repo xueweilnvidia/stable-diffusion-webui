@@ -33,8 +33,7 @@ def apply_optimizations():
     undo_optimizations()
 
     ldm.modules.diffusionmodules.model.nonlinearity = silu
-    ldm.modules.diffusionmodules.openaimodel.th = sd_hijack_unet.th
-    
+    # ldm.modules.diffusionmodules.openaimodel.th = sd_hijack_unet.th
     optimization_method = None
 
     can_use_sdp = hasattr(torch.nn.functional, "scaled_dot_product_attention") and callable(getattr(torch.nn.functional, "scaled_dot_product_attention")) # not everyone has torch 2.x to use sdp
